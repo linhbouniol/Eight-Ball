@@ -35,11 +35,37 @@ class ViewController: UIViewController {
     @IBOutlet var answerLabel: UILabel!
     
     @IBAction func flipEightBall(_ sender: Any) {
-        // Generate a random index
-        let index = Int(arc4random_uniform(UInt32(answers.count)))
+//        // Generate a random index
+//        let index = Int(arc4random_uniform(UInt32(answers.count))) // could repeat the same answer
+//
+//        let answer = answers[index]
+//        answerLabel.text = answer
         
-        let answer = answers[index]
-        answerLabel.text = answer
+        answerLabel.text = generateAnswer()
+    }
+    
+    private var lastAnswer = ""
+    
+    private func generateAnswer() -> String {   // if answer generated is the same as last answer, it will generate another one
+        
+        var result = ""
+        repeat {
+            // Generate a random index
+            let index = Int(arc4random_uniform(UInt32(answers.count)))
+            result = answers[index]
+        } while result == lastAnswer
+        
+        lastAnswer = result
+        
+        return result
+        
+        
+//        // Generate a random index
+//        let index = Int(arc4random_uniform(UInt32(answers.count)))
+//
+//        let answer = answers[index]
+//        return answer
+
     }
     
 
